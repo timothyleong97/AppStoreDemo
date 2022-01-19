@@ -1,0 +1,31 @@
+<html>
+<body>
+    <h2>Customers in the App Store</h2>
+    <a href="add">New customer</a>
+    <br/><br/>
+    <table border=1>
+        <thead>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Action</th>
+        </thead>
+        {% for cust in records %}
+        <tr>
+            <td> {{ cust.customerid }} </td>
+            <td> {{ cust.first_name }} </td>
+            <td> {{ cust.last_name }} </td>
+            <td>
+                <a href="view/{{cust.customerid}}"><button>View</button></a> | 
+                <a href="edit/{{cust.customerid}}"><button>Edit</button></a>
+                | 
+                <form method="POST" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{cust.customerid}}"/>
+                <button onclick="return confirm('Are you sure you want to delete {{cust.customerid}}?');" type="submit" name="action" value="delete">Delete</button> 
+              </form></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

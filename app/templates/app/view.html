@@ -1,0 +1,44 @@
+<html>
+<body>
+    <h2>Details for {{cust.first_name}} {{cust.last_name}}</h2>
+    <a href="/">Back to home</a>
+    <br/><br/>
+    <table style='text-align:left'>
+        <tr>
+            <th>ID</th>
+            <td>:</td>
+            <td> {{ cust.customerid }} </td>
+        </tr>
+        <tr>
+            <th>First name</th>
+            <td>:</td>
+            <td> {{ cust.first_name }} </td>
+        </tr>
+        <tr>
+            <th>Last name</th>
+            <td>:</td>
+            <td> {{ cust.last_name }} </td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>:</td>
+            <td> {{ cust.email }} </td>
+        </tr>
+        <tr>
+            <th>Date of birth</th>
+            <td>:</td>
+            <td> {{ cust.dob }} </td>
+        </tr>
+        <tr>
+            <th>Since</th>
+            <td>:</td>
+            <td> {{ cust.since }} </td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>:</td>
+            <td> {{ cust.country }} </td>
+        </tr>
+    </table>
+</body>
+</html>

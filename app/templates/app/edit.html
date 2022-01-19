@@ -1,0 +1,22 @@
+<html>
+<body>
+    <h2>Edit {{obj.customerid}}</h2>
+    <a href="/">Back to home</a>
+
+    <p style="color:red">{{ status|safe }}</p>
+
+    {% load crispy_forms_tags %}
+
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+
+        <!-- form -->
+        {{ form  | crispy}}
+        <br/>
+        <button type="submit" value="Update">Update</button>
+    </form>
+</body>
+</html>
+

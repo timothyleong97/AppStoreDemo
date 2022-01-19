@@ -1,0 +1,20 @@
+<html>
+<body>
+    <h2>Add New Customer</h2>
+    <a href="/">Back to home</a>
+
+    {% load crispy_forms_tags %}
+
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+
+        <!-- form -->
+        {{ form  | crispy}}
+        <br/>
+        <button type="submit" value="Add">Add</button>
+    </form>
+</body>
+</html>
+
