@@ -2,72 +2,67 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
-# Create your views here.
 def index(request):
     """Shows the main page"""
 
-    ## Delete customer
+    ## Delete customer request
     if request.POST:
         if request.POST['action'] == 'delete':
             Customers.objects.get(customerid=request.POST['id']).delete()
 
-    ## Use ORM to get all objects
+    ## Use ORM to get all customers ordered by their customer ID
     customers = Customers.objects.all().order_by('customerid')
     result_dict = {'records': customers}
 
+    ## Render the index page
     return render(request,'app/index.html',result_dict)
 
-# Create your views here.
 def view(request, id):
-    """Shows the main page"""
+    """Shows the view customer page"""
     
-    ## Use ORM to get all objects
+    ## Use ORM to get the customer by their ID
     customer = Customers.objects.filter(customerid=id).first()
     result_dict = {'cust': customer}
 
+    ## Render the view page
     return render(request,'app/view.html',result_dict)
 
-# Create your views here.
 def add(request):
-    """Shows the main page"""
+    """Shows the add new customer page"""
 
-    # dictionary for initial data with
-    # field names as keys
+    # Dictionary for initial data
     context ={}
-
-
-    # pass the object as instance in form
+    
+    ## Pass the object as instance in form
     form = CustomerForm(request.POST or None)
  
     status = ''
-    # save the data from the form
+ 
+    ## Save the data from the form
     if form.is_valid():
         form.save()        
         return redirect('index')    
 
-    form = CustomerForm(request.POST or None)
-
     context["status"] = status
     context["form"] = form
- 
+    
+    ## Render the add page
     return render(request, "app/add.html", context)
 
-# Create your views here.
 def edit(request, id):
-    """Shows the main page"""
+    """Shows the edit customer page"""
 
-    # dictionary for initial data with
-    # field names as keys
+    ## Dictionary for initial data 
     context ={}
  
-    # fetch the object related to passed id
+    ## Fetch the customer related with the given customerid
     obj = Customers.objects.filter(customerid=id).first()
 
-    # pass the object as instance in form
+    ## Pass the object as instance in form
     form = CustomerForm(request.POST or None, instance = obj)
  
     status = ''
-    # save the data from the form
+    ## Save the data from the form
     if form.is_valid():
         form.save()        
         status = 'Customer edited successfully!'
@@ -77,5 +72,6 @@ def edit(request, id):
     context["obj"] = obj
     context["status"] = status
     context["form"] = form
- 
+    
+    ## Render the edit page
     return render(request, "app/edit.html", context)
